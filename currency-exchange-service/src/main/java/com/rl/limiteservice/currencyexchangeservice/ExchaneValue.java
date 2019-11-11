@@ -1,5 +1,8 @@
 package com.rl.limiteservice.currencyexchangeservice;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 /**
@@ -7,11 +10,17 @@ import java.math.BigDecimal;
  * @version 1.0
  * @since 10/11/2019
  */
+@Entity
 public class ExchaneValue {
+
+    @Id
     private Long id;
+    @Column(name = "cr_from")
     private String from;
+    @Column(name = "cr_to")
     private String to;
     private BigDecimal conversionMultiple;
+    private int port;
 
     public ExchaneValue(){
 
@@ -22,6 +31,14 @@ public class ExchaneValue {
         this.from = from;
         this.to = to;
         this.conversionMultiple = conversionMultiple;
+    }
+
+    public ExchaneValue(Long id, String from, String to, BigDecimal conversionMultiple, int port) {
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.conversionMultiple = conversionMultiple;
+        this.port = port;
     }
 
     public Long getId() {
@@ -54,5 +71,13 @@ public class ExchaneValue {
 
     public void setConversionMultiple(BigDecimal conversionMultiple) {
         this.conversionMultiple = conversionMultiple;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }
