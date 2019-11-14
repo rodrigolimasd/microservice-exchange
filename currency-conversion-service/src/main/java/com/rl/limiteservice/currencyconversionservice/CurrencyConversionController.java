@@ -29,7 +29,7 @@ public class CurrencyConversionController {
         uriVariables.put("from", from);
         uriVariables.put("to", to);
         ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate()
-                .getForEntity("http://localhost:8000/currency-exchange/{from}/USD/{to}/BRL",
+                .getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}",
                 CurrencyConversionBean.class, uriVariables);
 
         CurrencyConversionBean response = responseEntity.getBody();
@@ -37,5 +37,12 @@ public class CurrencyConversionController {
         return new CurrencyConversionBean(response.getId(),from, to, response.getConversionMultiple(),
                 quantity,quantity.multiply(response.getConversionMultiple()), response.getPort());
 
+    }
+
+    @GetMapping("/ping")
+    public HashMap ping(){
+        ResponseEntity<HashMap> responseEntity = new RestTemplate()
+                .getForEntity("http://localhost:8000/ping", HashMap.class);
+        return responseEntity.getBody();
     }
 }
