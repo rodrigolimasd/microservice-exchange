@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-
 /**
  * @author rodrigo
  * @version 1.0
@@ -19,10 +17,12 @@ public class CurrencyExchangeController {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private ExchangeValueRepository repository;
+
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
-    public ExchaneValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to){
-        ExchaneValue exchaneValue = new ExchaneValue(1000L, from, to, BigDecimal.valueOf(65));
-        exchaneValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
-        return exchaneValue;
+    public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to){
+        ExchangeValue exchangeValue = repository.findByFromAndTo(from, to);
+        return exchangeValue;
     }
 }

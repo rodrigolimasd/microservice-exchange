@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @since 10/11/2019
  */
 @Entity
-public class ExchaneValue {
+public class ExchangeValue {
 
     @Id
     private Long id;
@@ -19,21 +19,22 @@ public class ExchaneValue {
     private String from;
     @Column(name = "cr_to")
     private String to;
+    //"CONVERSION_MUTIPLE"
     private BigDecimal conversionMultiple;
     private int port;
 
-    public ExchaneValue(){
+    public ExchangeValue(){
 
     }
 
-    public ExchaneValue(Long id, String from, String to, BigDecimal conversionMultiple) {
+    public ExchangeValue(Long id, String from, String to, BigDecimal conversionMultiple) {
         this.id = id;
         this.from = from;
         this.to = to;
         this.conversionMultiple = conversionMultiple;
     }
 
-    public ExchaneValue(Long id, String from, String to, BigDecimal conversionMultiple, int port) {
+    public ExchangeValue(Long id, String from, String to, BigDecimal conversionMultiple, int port) {
         this.id = id;
         this.from = from;
         this.to = to;
