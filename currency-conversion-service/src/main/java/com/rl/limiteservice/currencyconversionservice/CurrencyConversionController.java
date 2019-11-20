@@ -1,5 +1,7 @@
 package com.rl.limiteservice.currencyconversionservice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CurrencyEditor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import java.util.Map;
  */
 @RestController
 public class CurrencyConversionController {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private  CurrencyExchangeServiceProxy proxy;
@@ -50,6 +54,8 @@ public class CurrencyConversionController {
             @PathVariable BigDecimal quantity){
 
         CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
+        logger.info("{}", response);
 
         return new CurrencyConversionBean(response.getId(),from, to, response.getConversionMultiple(),
                 quantity,quantity.multiply(response.getConversionMultiple()), response.getPort());
